@@ -24,13 +24,21 @@ Sample Input 0
 
 APPROACH 1
 
-Read in the number of genes noGenes and the list of genes genes.
-Read in the list of health values healths corresponding to each gene.
-Read in the number of DNA strands to be evaluated noStrands.
-Create a dictionary geneHealthMapping where each key is a gene and its value is a list of two lists. The first list contains the indices of the gene in the original list of genes, and the second list contains the cumulative sum of the health values of the gene up to that index.
-Create a set groupOfSets which stores all possible substrings of genes of length less than or equal to 500.
-Loop through the noStrands DNA strands to be evaluated. For each strand: a. Read in the first and last indices first and last of the genes to consider for this strand. b. Read in the strand strand to be evaluated. c. Initialize two variables, h to store the health of the strand, and ls to store the length of the strand. d. Loop through all possible substrings of the strand. For each substring: i. Check if the substring exists in the groupOfSets set. If it doesn't, continue with the next substring. ii. If the substring exists in the geneHealthMapping dictionary, retrieve its indices and cumulative health values. iii. Use the binary search functions bLeft and bRight to find the indices corresponding to 1st. and last ind.list. iv. Add the health values of the genes in the given range to the h variable. e. Update the minimum and maximum health values found so far with the h variable.
-Print the minimum and maximum health values found.
+1. Read in the number of genes noGenes and the list of genes genes.
+
+2. Read in the list of health values healths corresponding to each gene.
+
+3. Read in the number of DNA strands to be evaluated noStrands.
+
+4. Create a dictionary geneHealthMapping where each key is a gene and its value is a list of two lists. The first list contains the indices of the gene in the original list of genes, and the second list contains the cumulative sum of the health values of the gene up to that index.
+
+5. Create a set groupOfSets which stores all possible substrings of genes of length less than or equal to 500.
+
+6. Loop through the noStrands DNA strands to be evaluated. For each strand: a. Read in the first and last indices first and last of the genes to consider for this strand. b. Read in the strand strand to be evaluated. c. Initialize two variables, h to store the health of the strand, and ls to store the length of the strand. d. Loop through all possible substrings of the strand. For each substring: i. Check if the substring exists in the groupOfSets set. If it doesn't, continue with the next substring. ii. If the substring exists in the geneHealthMapping dictionary, retrieve its indices and cumulative health values. iii. Use the binary search functions bLeft and bRight to find the indices corresponding to 1st. and last ind.list. iv. Add the health values of the genes in the given range to the h variable. e. Update the minimum and maximum health values found so far with the h variable.
+
+7. Print the minimum and maximum health values found.
+
+
 Reasoning:
 
 This code is a solution to a problem that involves calculating the health of a DNA strand, based on its substrings, called genes. Given a list of genes and their health values, the health of a DNA strand is calculated by summing the health values of its substrings present in the genes list.
