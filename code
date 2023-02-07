@@ -1,0 +1,73 @@
+# Determine DNA health
+
+
+from math import inf
+from bisect import bisect_left as bLeft, bisect_right as bRight
+from collections import defaultdict
+
+noGenes = int(input())
+
+genes = input().rstrip().split()
+
+healths = list(map(int, input().rstrip().split()))
+
+noStrands = int(input())
+
+geneHealthMapping = defaultdict(lambda: [[], [0]])
+
+
+groupOfSets = set()
+
+for id, gene in enumerate(genes):
+  
+  geneHealthMapping[gene][0].append(id)
+  
+  for j in range(1, min(len(gene), 500)+1):
+        
+    groupOfSets.add(gene[:j])
+    
+for v in geneHealthMapping.values():
+    
+    for i, ix in enumerate(v[0]): 
+        
+        v[1].append(v[1][i]+healths[ix])
+        
+largest = max(list(map(len, genes)))
+
+
+hMin, hMax = inf, 0
+for i in range(noStrands):
+  firstLastd = input().split()
+  first = int(firstLastd[0])
+  last = int(firstLastd[1])
+  strand = firstLastd[2]
+   
+
+  h, ls = 0, len(strand)
+  
+  for f in range(ls):
+    
+    for j in range(1, largest+1):
+      
+      if f+j > ls: break
+      sub = strand[f:f+j]
+      
+      if sub not in groupOfSets: break
+      if sub not in geneHealthMapping: continue
+      ids, hs = geneHealthMapping[sub]
+      
+      h += hs[bRight(ids, last)]-hs[bLeft(ids, first)]
+  hMin, hMax = min(hMin, h), max(hMax, h)
+ 
+print(hMin, hMax)
+
+#for input:
+#6
+#a b c aa d b
+#1 2 3 4 5 6
+#3
+#1 5 caaab
+#0 4 xyz
+#2 4 bcdybc
+#
+#the output is : 0 19
